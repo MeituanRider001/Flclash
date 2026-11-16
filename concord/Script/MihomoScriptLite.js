@@ -236,11 +236,9 @@ function main(config) {
     'store-fake-ip': true
   };
 
-  config['geodata-mode'] = true;
   config['geo-auto-update'] = true;
   config['geo-update-interval'] = 24;
   config['geox-url'] = {
-    geoip: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip.dat",
     geosite: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat",
     mmdb: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb",
     asn: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb"
