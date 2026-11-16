@@ -8,35 +8,75 @@
 >
 > 按自身机场与使用习惯调整，**非通用方案**，不保证适配所有机场与客户端，也不接受适配类问题反馈。
 
-## 目录结构
+## 覆写脚本（推荐）
+
+覆写脚本不改动机场订阅正文，客户端启动时动态注入策略组、清洗节点名称、补全国旗。机场换节点后无需手动调整配置，始终与节点列表保持同步。
+
+> [!NOTE]
+>
+> 脚本仅用于覆写**机场提供的订阅配置**，不要用于覆写本仓库的静态 YAML，二者会互相冲突。
+
+### 全量版
+
+[concord/Script/MihomoScript.js](/concord/Script/MihomoScript.js)，复制下方链接使用 👇
 
 ```text
-concord/
-├── Config/          静态 YAML，Concord 可直接读取
-│   ├── MihomoConfig.yaml
-│   ├── MihomoConfigLite.yaml
-│   └── MihomoConfigRelay.yaml
-└── Script/          mihomo 覆写脚本，需客户端支持脚本覆写
-    ├── MihomoScript.js
-    └── MihomoScriptLite.js
+https://raw.githubusercontent.com/MeituanRider001/Flclash/main/concord/Script/MihomoScript.js
 ```
+
+### 精简版
+
+[concord/Script/MihomoScriptLite.js](/concord/Script/MihomoScriptLite.js)，复制下方链接使用 👇
+
+```text
+https://raw.githubusercontent.com/MeituanRider001/Flclash/main/concord/Script/MihomoScriptLite.js
+```
+
+---
 
 ## 配置文件
 
-| 文件 | 策略组 | 说明 |
-|---|---|---|
-| `MihomoConfig.yaml` | 23 | 全量：5 地区手动组 + 5 自动测速组 + `Other` + 功能分流组 |
-| `MihomoConfigLite.yaml` | 17 | 精简：5 地区手动组 + 功能分流组，无 `Other` 与自动组 |
-| `MihomoConfigRelay.yaml` | 25 | 代理链：全量 + 入口 / 落地双订阅 |
+静态 YAML 不依赖客户端脚本支持，任何 mihomo 内核客户端与 Concord 均可直接读取；代价是**无法像脚本那样动态处理**，某个地区没有匹配到节点时该策略组会为空。
 
-## 覆写脚本
+### 全量版
 
-| 文件 | 行数 | 说明 |
-|---|---|---|
-| `MihomoScript.js` | 584 | 全量版，策略组与分流规则最完整 |
-| `MihomoScriptLite.js` | 508 | 精简版，策略组更少 |
+[concord/Config/MihomoConfig.yaml](/concord/Config/MihomoConfig.yaml) 👇
 
-Concord 内核本身只读取 YAML、不执行脚本；`Script/` 供支持脚本覆写的客户端使用。
+```text
+https://raw.githubusercontent.com/MeituanRider001/Flclash/main/concord/Config/MihomoConfig.yaml
+```
+
+### 精简版
+
+[concord/Config/MihomoConfigLite.yaml](/concord/Config/MihomoConfigLite.yaml) 👇
+
+```text
+https://raw.githubusercontent.com/MeituanRider001/Flclash/main/concord/Config/MihomoConfigLite.yaml
+```
+
+### 代理链版
+
+[concord/Config/MihomoConfigRelay.yaml](/concord/Config/MihomoConfigRelay.yaml) 👇
+
+```text
+https://raw.githubusercontent.com/MeituanRider001/Flclash/main/concord/Config/MihomoConfigRelay.yaml
+```
+
+适用于「中转入口 + 落地出口」双订阅。两条订阅分别填写：
+
+```yaml
+proxy-providers:
+  Subscribe-In:                      # 第一跳：中转入口
+    url: http://your-entry-provider
+    <<: *p
+  Subscribe-Out:                     # 第二跳：最终落地
+    url: http://your-exit-provider
+    <<: *p
+    override:
+      dialer-proxy: Entry-Group      # 关键：出口节点自动借道入口组
+```
+
+`Entry-Group` 绑定 `Subscribe-In` 选择中转节点，`Exit-Group` 绑定 `Subscribe-Out` 选择落地节点，流量路径为 `本机 → Entry-Group → Exit-Group → 目标站点`。
 
 ## 免责声明
 
