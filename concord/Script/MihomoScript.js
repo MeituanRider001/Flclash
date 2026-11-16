@@ -186,7 +186,6 @@ function buildDnsAndHostsConfig(config, filteredProxies) {
     'fake-ip-filter': [
       'geosite:private',
       'geosite:cn',
-      'geosite:googlefcm',
       ...proxyFakeIpFilter
     ],
     'default-nameserver': defaultDNS,
@@ -197,7 +196,6 @@ function buildDnsAndHostsConfig(config, filteredProxies) {
     nameserver: foreignDNS,
     'nameserver-policy': {
       'geosite:private': 'system',
-      'geosite:category-entertainment-cn,douyin': ['system', '180.184.1.1', '180.184.2.2'],
       'geosite:cn': chinaDNS,
     },
     'direct-nameserver': chinaDNS,
