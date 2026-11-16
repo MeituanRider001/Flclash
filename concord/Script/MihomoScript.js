@@ -229,14 +229,10 @@ function main(config) {
   config['ipv6'] = true;
   config['mode'] = 'rule';
   config['log-level'] = 'info';
-  config['bind-address'] = '*';
   config['unified-delay'] = true;
   config['tcp-concurrent'] = true;
   config['keep-alive-interval'] = 60;
   config['find-process-mode'] = 'strict';
-  config['external-controller'] = '127.0.0.1:9090';
-  config['external-ui'] = 'ui';
-  config['external-ui-url'] = 'https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip';
 
   config['profile'] = {
     'store-selected': true,
@@ -290,7 +286,6 @@ function main(config) {
     stack: 'mips',
     'auto-route': true,
     'strict-route': true,
-    'auto-redirect': true,
     'auto-detect-interface': true,
     'dns-hijack': ['any:53', 'tcp://any:53']
   };
