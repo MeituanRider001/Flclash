@@ -38,12 +38,6 @@ concord/
 
 Concord 内核本身只读取 YAML、不执行脚本；`Script/` 供支持脚本覆写的客户端使用。
 
-## 致谢
-
-- [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
-- [chen08209/concord](https://github.com/chen08209/concord)
-- [AIsouler/MyClash](https://github.com/AIsouler/MyClash)
-
 ## 免责声明
 
 本项目仅供个人学习与自用。使用本仓库配置所产生的任何后果由使用者自行承担，作者不对可用性、安全性或合规性作任何保证。
