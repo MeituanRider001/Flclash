@@ -38,27 +38,6 @@ concord/
 
 Concord 内核本身只读取 YAML、不执行脚本；`Script/` 供支持脚本覆写的客户端使用。
 
-## Concord 适配
-
-以下字段在 Concord 中被忽略或不受支持，本仓库的配置与脚本已移除：
-
-| 字段 | 级别 | 说明 |
-|---|---|---|
-| `bind-address` | T2 | 忽略 |
-| `external-controller` | T1 | 嵌入 App 时由 App 接管 |
-| `external-ui` / `external-ui-url` | T2 | Concord 不提供 Web UI |
-| `tun.auto-redirect` | T2 | 忽略 |
-| `geodata-mode` | T2 | Concord 只读 mmdb，`GeoIP.dat` 不生效 |
-| `geox-url.geoip` | T2 | 同上 |
-
-`path-in-bundle` 在 Concord 中会直接导致整份配置被拒绝、全部流量走直连，本仓库未使用该字段。
-
-分层的含义：T0 完全支持，T1 部分支持，T2 忽略并产生 `unsupported_key` 警告。定义见 Concord 的 `crates/config/src/keys.rs`。
-
-## 图标
-
-策略组图标托管在 [Mihomo 仓库](https://github.com/MeituanRider001/Mihomo/tree/main/Icons/svg)，脚本中的 `iconBaseUrl` 指向该地址，无需在本仓库另存。
-
 ## 致谢
 
 - [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)
