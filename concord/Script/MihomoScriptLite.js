@@ -237,9 +237,9 @@ function main(config) {
   config['geo-auto-update'] = true;
   config['geo-update-interval'] = 24;
   config['geox-url'] = {
-    geosite: "https://mirror.ghproxy.com/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat",
-    mmdb: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb",
-    asn: "https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb"
+    geosite: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat",
+    mmdb: "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb",
+    asn: "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb"
   };
 
   // 2. 节点预处理：清洗垃圾节点与自动补充国旗
